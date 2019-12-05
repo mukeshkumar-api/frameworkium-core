@@ -82,13 +82,13 @@ script:
   - mvn verify -B -o -Dthreads=${THREAD_COUNT} -Dbrowser=firefox -DreuseBrowser=true -Dheadless=true -Dit.test=TheInternetExampleTests -DcaptureURL=${CAPTURE_URL} -DsutName="${SUT_NAME}" -DsutVersion="${SUT_VERSION}" 2> /dev/null
 
   # Chrome on the grid
-  - mvn verify -B -o -Dthreads=${THREAD_COUNT} -Dbrowser=chrome -DreuseBrowser=true -Dheadless=true -DgridURL=http://localhost:4444/wd/hub -DcaptureURL=${CAPTURE_URL} -DsutName="${SUT_NAME}" -DsutVersion="${SUT_VERSION}"
+  - mvn verify -B -o -Dthreads=1 -Dbrowser=chrome -DreuseBrowser=true -Dheadless=true -DgridURL=http://localhost:4444/wd/hub -DcaptureURL=${CAPTURE_URL} -DsutName="${SUT_NAME}" -DsutVersion="${SUT_VERSION}"
 
   # Custom Browser Impl (without Capture so the PageFactorySpec runs)
   - mvn verify -B -o -Dthreads=${THREAD_COUNT} -DcustomBrowserImpl=com.frameworkium.integration.CustomFirefoxImpl -Dmaximise=true -Dit.test=DocumentationTest 2> /dev/null
 
   # Test groups and test that all @Before methods in BaseUITest run
-  - mvn verify -B -o -Dthreads=${THREAD_COUNT} -Dbrowser=chrome -Dgroups=fw-bugs -DreuseBrowser=true -Dheadless=true
+  - mvn verify -B -o -Dthreads=1 -Dbrowser=chrome -Dgroups=fw-bugs -DreuseBrowser=true -Dheadless=true
 
   # Query Jira for which test to run and then log results to Jira
   # Disabled until we have a JIRA to use
