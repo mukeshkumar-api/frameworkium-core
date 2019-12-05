@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
@@ -34,10 +35,12 @@ public class EnglishCountiesPage extends BasePage<EnglishCountiesPage> {
     }
 
     public int populationOf(String countyName) {
-        String lookupHeader = "County";
-        String targetHeader = "Population";
+        Predicate<WebElement> lookupHeader = element -> element.getText().trim().equals("County");
+        Predicate<WebElement> countyNameLookup = element -> element.getText().trim().equals(countyName);
+        Predicate<WebElement> targetHeader = element -> element.getText().trim().startsWith("Population");
+
         String population = listTable
-                .getCellsByLookup(lookupHeader, countyName, targetHeader)
+                .getCellsByLookup(lookupHeader, countyNameLookup, targetHeader)
                 .findFirst()
                 .orElseThrow(NotFoundException::new)
                 .getText()
