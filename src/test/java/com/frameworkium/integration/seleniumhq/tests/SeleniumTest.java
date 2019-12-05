@@ -9,7 +9,7 @@ public class SeleniumTest extends BaseUITest {
 
     public final void component_example_test() {
         String latestVersion = HomePage.open()
-                .getHeader()
+                .getNavBar()
                 .clickDownloadLink()
                 .getLatestVersion();
 
